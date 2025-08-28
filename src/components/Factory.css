@@ -1,0 +1,146 @@
+.factory-card {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 1px solid #2a2a3e;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  min-width: 300px;
+}
+
+.factory-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  border-color: #4a4a6e;
+}
+
+.factory-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #2a2a3e;
+}
+
+.factory-icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.factory-name {
+  color: #ffffff;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  flex-grow: 1;
+}
+
+.factory-level {
+  background: linear-gradient(45deg, #ff6b6b, #ffa500);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.factory-details {
+  margin-bottom: 15px;
+}
+
+.production-info,
+.production-time,
+.upgrade-cost {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.production-label,
+.time-label,
+.cost-label {
+  color: #a0a0a0;
+  font-size: 14px;
+}
+
+.production-value,
+.time-value,
+.cost-value {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.production-progress {
+  margin-bottom: 15px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #2a2a3e;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00ff88, #00cc6a);
+  transition: width 0.3s ease;
+  border-radius: 4px;
+}
+
+.progress-text {
+  color: #a0a0a0;
+  font-size: 12px;
+  text-align: center;
+  display: block;
+}
+
+.factory-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.collect-button,
+.upgrade-button {
+  flex: 1;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.collect-button {
+  background: linear-gradient(45deg, #00ff88, #00cc6a);
+  color: #1a1a2e;
+}
+
+.collect-button:hover {
+  background: linear-gradient(45deg, #00cc6a, #00994d);
+  transform: translateY(-1px);
+}
+
+.upgrade-button {
+  background: linear-gradient(45deg, #ff6b6b, #ffa500);
+  color: white;
+}
+
+.upgrade-button:hover {
+  background: linear-gradient(45deg, #ff5252, #ff8c00);
+  transform: translateY(-1px);
+}
+
+.collect-button:disabled,
+.upgrade-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}

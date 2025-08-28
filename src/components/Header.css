@@ -1,0 +1,491 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%);
+  border-bottom: 2px solid #2a2a3e;
+  padding: 20px 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.game-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.financial-metrics {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.metric {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.metric-icon {
+  font-size: 1.2rem;
+}
+
+.metric-label {
+  color: #b0b0b0;
+  font-weight: 400;
+}
+
+.metric-value {
+  color: #ffd700;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.metric-value.positive {
+  color: #00ff88;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+.metric-value.negative {
+  color: #ff4444;
+  text-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
+}
+
+.pause-button {
+  background: linear-gradient(135deg, #ff4444 0%, #cc3333 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 68, 68, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pause-button:hover {
+  background: linear-gradient(135deg, #ff6666 0%, #ff4444 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 68, 68, 0.4);
+}
+
+.pause-button.paused {
+  background: linear-gradient(135deg, #00ff88 0%, #00cc66 100%);
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+.pause-button.paused:hover {
+  background: linear-gradient(135deg, #33ff99 0%, #00ff88 100%);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+}
+
+.user-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-icon {
+  font-size: 1.2rem;
+}
+
+.username {
+  color: #00ff88;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.connection-status {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.connection-status.connected {
+  color: #00ff88;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid #00ff88;
+}
+
+.connection-status.disconnected {
+  color: #ff4444;
+  background: rgba(255, 68, 68, 0.1);
+  border: 1px solid #ff4444;
+}
+
+.logout-button {
+  background: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.save-button {
+  background: #00ff88;
+  color: #1a1a2e;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.save-button:hover:not(:disabled) {
+  background: #00cc6a;
+  transform: translateY(-1px);
+}
+
+.save-button:disabled {
+  background: #4a4a5e;
+  color: #808080;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.logout-button:hover {
+  background: #cc3333;
+  transform: translateY(-1px);
+}
+
+.save-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid #00ff88;
+  border-radius: 6px;
+  padding: 6px 10px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.save-icon {
+  font-size: 1rem;
+  animation: spin 1s linear infinite;
+}
+
+.save-text {
+  color: #00ff88;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 1400px) {
+  .header-content {
+    padding: 0 15px;
+  }
+  
+  .game-title {
+    font-size: 1.6rem;
+  }
+  
+  .financial-metrics {
+    gap: 25px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 0 15px;
+  }
+  
+  .financial-metrics {
+    justify-content: flex-start;
+    gap: 20px;
+  }
+  
+  .game-title {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .header-content {
+    gap: 12px;
+    padding: 0 12px;
+  }
+  
+  .financial-metrics {
+    gap: 18px;
+  }
+  
+  .game-title {
+    font-size: 1.3rem;
+  }
+  
+  .metric {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 8px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  
+  .header-content {
+    gap: 6px;
+    padding: 0 8px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .game-title {
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+  
+  .financial-metrics {
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  
+  .metric {
+    font-size: 0.7rem;
+    gap: 4px;
+  }
+  
+  .metric-icon {
+    font-size: 0.8rem;
+  }
+  
+  .metric-label {
+    display: none; /* Hide labels on mobile to save space */
+  }
+  
+  .user-controls {
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  
+  .user-info {
+    padding: 4px 6px;
+    display: none; /* Hide user info on mobile */
+  }
+  
+  .username {
+    font-size: 0.7rem;
+  }
+  
+  .save-indicator {
+    padding: 3px 6px;
+    display: none; /* Hide save indicator on mobile */
+  }
+  
+  .save-text {
+    font-size: 0.65rem;
+  }
+  
+  .save-button {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+    display: none; /* Hide save button on mobile */
+  }
+  
+  .logout-button {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+  }
+  
+  .pause-button {
+    padding: 6px 12px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 6px 0;
+  }
+  
+  .header-content {
+    gap: 4px;
+    padding: 0 6px;
+  }
+  
+  .game-title {
+    font-size: 0.9rem;
+  }
+  
+  .financial-metrics {
+    gap: 6px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  .metric {
+    font-size: 0.65rem;
+    gap: 2px;
+  }
+  
+  .metric-icon {
+    font-size: 0.7rem;
+  }
+  
+  .metric-value {
+    font-size: 0.8rem;
+  }
+  
+  .user-controls {
+    gap: 4px;
+    flex-wrap: nowrap;
+  }
+  
+  .user-info {
+    display: none;
+  }
+  
+  .username {
+    font-size: 0.65rem;
+  }
+  
+  .save-indicator {
+    display: none;
+  }
+  
+  .save-text {
+    font-size: 0.6rem;
+  }
+  
+  .save-button {
+    display: none;
+  }
+  
+  .logout-button {
+    padding: 3px 6px;
+    font-size: 0.65rem;
+  }
+  
+  .pause-button {
+    padding: 4px 8px;
+    font-size: 0.65rem;
+  }
+}
+
+/* Large screen optimization */
+@media (min-width: 1600px) {
+  .header-content {
+    max-width: 1600px;
+    padding: 0 30px;
+  }
+  
+  .game-title {
+    font-size: 2.2rem;
+  }
+  
+  .financial-metrics {
+    gap: 35px;
+  }
+  
+  .metric {
+    font-size: 1.1rem;
+  }
+  
+  .metric-value {
+    font-size: 1.2rem;
+  }
+  
+  .pause-button {
+    padding: 14px 28px;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .header-content {
+    max-width: 1800px;
+    padding: 0 40px;
+  }
+  
+  .game-title {
+    font-size: 2.5rem;
+  }
+  
+  .financial-metrics {
+    gap: 40px;
+  }
+  
+  .metric {
+    font-size: 1.2rem;
+  }
+  
+  .metric-value {
+    font-size: 1.3rem;
+  }
+  
+  .pause-button {
+    padding: 16px 32px;
+    font-size: 1.1rem;
+  }
+}

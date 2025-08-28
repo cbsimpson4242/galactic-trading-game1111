@@ -1,0 +1,147 @@
+.price-chart {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.price-chart:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.chart-label {
+  font-size: 0.8rem;
+  color: #b0b0b0;
+  font-weight: 500;
+}
+
+.trend-indicator {
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.trend-indicator.up {
+  color: #00ff88;
+}
+
+.trend-indicator.down {
+  color: #ff4444;
+}
+
+.chart-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  transition: all 0.3s ease;
+}
+
+.current-price {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  animation: priceUpdate 0.5s ease-out;
+}
+
+.price-change {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  animation: slideIn 0.4s ease-out;
+}
+
+.price-change:not(:empty) {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Smooth chart transitions */
+.recharts-line {
+  transition: all 0.3s ease;
+}
+
+.recharts-line-curve {
+  transition: all 0.3s ease;
+}
+
+.recharts-active-dot {
+  transition: all 0.2s ease;
+}
+
+.recharts-tooltip-wrapper {
+  transition: all 0.2s ease;
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes priceUpdate {
+  0% {
+    transform: scale(1);
+    color: #ffffff;
+  }
+  50% {
+    transform: scale(1.1);
+    color: #00ff88;
+  }
+  100% {
+    transform: scale(1);
+    color: #ffffff;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .price-chart {
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+  
+  .chart-label {
+    font-size: 0.7rem;
+  }
+  
+  .current-price {
+    font-size: 0.9rem;
+  }
+  
+  .price-change {
+    font-size: 0.7rem;
+  }
+}
