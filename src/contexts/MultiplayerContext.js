@@ -22,9 +22,13 @@ export const MultiplayerProvider = ({ children }) => {
 
   useEffect(() => {
     // Connect to the multiplayer server - use environment variable or fallback to localhost
-    const serverUrl = process.env.REACT_APP_MULTIPLAYER_SERVER || 'https://galactic-trading-server.glitch.me';
+    const serverUrl = process.env.REACT_APP_MULTIPLAYER_SERVER || 'http://localhost:3005';
     console.log('Connecting to multiplayer server:', serverUrl);
-    const newSocket = io(serverUrl);
+    const newSocket = io(serverUrl, {
+      transports: ['websocket', 'polling'], // Ensure compatibility
+      timeout: 20000,
+      forceNew: true
+    });
     setSocket(newSocket);
 
     // Connection events
