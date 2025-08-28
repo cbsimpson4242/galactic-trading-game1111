@@ -7,18 +7,10 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: [
-      "http://localhost:4112", 
-      "http://localhost:3000",
-      "https://galactic-commodity-exchange.netlify.app",
-      "https://*.netlify.app",
-      /\.netlify\.app$/,
-      /\.onrender\.com$/
-    ],
+    origin: ["http://localhost:4112", "https://your-app-domain.com", "http://localhost:3000"],
     methods: ["GET", "POST"],
     credentials: true
-  },
-  transports: ['websocket', 'polling']
+  }
 });
 
 app.use(cors());
@@ -382,18 +374,7 @@ setInterval(() => {
   }
 }, 60000); // Check every minute
 
-// Health check endpoint
-app.get('/', (req, res) => {
-  res.json({ 
-    status: 'online', 
-    players: io.engine.clientsCount,
-    uptime: process.uptime(),
-    timestamp: new Date().toISOString()
-  });
-});
-
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
   console.log(`Multiplayer server running on port ${PORT}`);
-  console.log(`Health check available at: http://localhost:${PORT}/`);
 });
