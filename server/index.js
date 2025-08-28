@@ -13,12 +13,19 @@ const io = socketIo(server, {
       "https://galactic-commodity-exchange.netlify.app",
       "https://*.netlify.app",
       /\.netlify\.app$/,
-      /\.onrender\.com$/
+      /\.onrender\.com$/,
+      /\.replit\.app$/,
+      /\.repl\.co$/
     ],
     methods: ["GET", "POST"],
     credentials: true
   },
-  transports: ['websocket', 'polling']
+  transports: ['polling', 'websocket'],
+  allowEIO3: true,
+  pingTimeout: 60000,
+  pingInterval: 25000,
+  upgradeTimeout: 30000,
+  maxHttpBufferSize: 1e6
 });
 
 app.use(cors());

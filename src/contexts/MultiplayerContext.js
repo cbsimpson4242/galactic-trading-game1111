@@ -25,9 +25,16 @@ export const MultiplayerProvider = ({ children }) => {
     const serverUrl = process.env.REACT_APP_MULTIPLAYER_SERVER || 'http://localhost:3005';
     console.log('Connecting to multiplayer server:', serverUrl);
     const newSocket = io(serverUrl, {
-      transports: ['websocket', 'polling'], // Ensure compatibility
-      timeout: 20000,
-      forceNew: true
+      transports: ['polling', 'websocket'], // Polling first for mobile compatibility
+      timeout: 30000,
+      forceNew: true,
+      upgrade: true,
+      rememberUpgrade: false,
+      autoConnect: true,
+      reconnection: true,
+      reconnectionDelay: 1000,
+      reconnectionAttempts: 10,
+      maxReconnectionAttempts: 10
     });
     setSocket(newSocket);
 
@@ -81,17 +88,36 @@ export const MultiplayerProvider = ({ children }) => {
       // You can add a notification system here
     });
 
-    // Add connection status logging
+    // Add connection status logging with mobile detection
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
     newSocket.on('connect', () => {
-      console.log('✅ Connected to multiplayer server');
+      console.log('✅ Connected to multiplayer server', isMobile ? '(Mobile)' : '(Desktop)');
     });
 
     newSocket.on('disconnect', (reason) => {
-      console.log('❌ Disconnected from multiplayer server:', reason);
+      console.log('❌ Disconnected from multiplayer server:', reason, isMobile ? '(Mobile)' : '(Desktop)');
     });
 
     newSocket.on('connect_error', (error) => {
-      console.log('⚠️ Connection error:', error.message);
+      console.log('⚠️ Connection error:', error.message, isMobile ? '(Mobile)' : '(Desktop)');
+      console.log('Error details:', error);
+    });
+
+    newSocket.on('reconnect', (attemptNumber) => {
+      console.log('🔄 Reconnected after', attemptNumber, 'attempts');
+    });
+
+    newSocket.on('reconnecting', (attemptNumber) => {
+      console.log('🔄 Reconnecting attempt', attemptNumber);
+    });
+
+    newSocket.on('reconnect_error', (error) => {
+      console.log('❌ Reconnect error:', error.message);
+    });
+
+    newSocket.on('reconnect_failed', () => {
+      console.log('❌ Reconnection failed');
     });
 
     // Player events
@@ -130,17 +156,32 @@ export const MultiplayerProvider = ({ children }) => {
     };
   }, []);
 
-  // Retry connection if disconnected
+  // Retry connection if disconnected with mobile-friendly intervals
   useEffect(() => {
     if (!isConnected && socket) {
       const retryTimeout = setTimeout(() => {
         console.log('Retrying connection to multiplayer server...');
         socket.connect();
-      }, 3000);
+      }, 5000); // Longer delay for mobile networks
 
       return () => clearTimeout(retryTimeout);
     }
   }, [isConnected, socket]);
+
+  // Add visibility change handler for mobile app switching
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && socket && !isConnected) {
+        console.log('App became visible, attempting reconnection...');
+        setTimeout(() => {
+          socket.connect();
+        }, 1000);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [socket, isConnected]);
 
   // Join the game
   const joinGame = (userData) => {
