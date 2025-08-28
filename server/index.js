@@ -400,7 +400,7 @@ app.get('/', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3005;
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`Multiplayer server running on port ${PORT}`);
-  console.log(`Health check available at: http://localhost:${PORT}/`);
+  console.log(`Health check available at: http://0.0.0.0:${PORT}/`);
 });

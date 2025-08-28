@@ -21,8 +21,8 @@ export const MultiplayerProvider = ({ children }) => {
   const [playerData, setPlayerData] = useState(null);
 
   useEffect(() => {
-    // Connect to the multiplayer server - use environment variable or fallback to localhost
-    const serverUrl = process.env.REACT_APP_MULTIPLAYER_SERVER || 'http://localhost:3005';
+    // Connect to the multiplayer server - use environment variable or fallback to Replit deployment
+    const serverUrl = process.env.REACT_APP_MULTIPLAYER_SERVER || `https://${window.location.hostname.replace('-00-', '-01-')}:3005`;
     console.log('Connecting to multiplayer server:', serverUrl);
     const newSocket = io(serverUrl, {
       transports: ['polling', 'websocket'], // Polling first for mobile compatibility
