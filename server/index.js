@@ -15,7 +15,9 @@ const io = socketIo(server, {
       /\.netlify\.app$/,
       /\.onrender\.com$/,
       /\.replit\.app$/,
-      /\.repl\.co$/
+      /\.repl\.co$/,
+      /\.replit\.dev$/,
+      /\.replit\.com$/
     ],
     methods: ["GET", "POST"],
     credentials: true
@@ -403,5 +405,4 @@ const PORT = process.env.PORT || 3005;
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`Multiplayer server running on port ${PORT}`);
   console.log(`Health check available at: http://0.0.0.0:${PORT}/`);
-});
 });
